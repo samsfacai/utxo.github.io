@@ -1,0 +1,148 @@
+/* General Reset */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* Kaspa Theme Colors */
+
+:root {
+    --kaspa-primary: #3b3f45;
+    --kaspa-accent: #00e6cc;
+    --kaspa-light: #f9f9f9;
+    --kaspa-hover: #02947d;
+}
+
+
+/* Body Styling */
+
+body {
+    font-family: 'Arial', sans-serif;
+    color: var(--kaspa-primary);
+    background-color: var(--kaspa-light);
+    line-height: 1.6;
+    padding: 0 15px;
+}
+
+
+/* Header */
+
+header {
+    background: var(--kaspa-primary);
+    color: white;
+    padding: 20px 0;
+    text-align: center;
+}
+
+header h1 {
+    font-size: 2.5em;
+    letter-spacing: 1px;
+}
+
+
+/* Main Section */
+
+main {
+    max-width: 980px;
+    margin: 20px auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+
+/* Search Section */
+
+#search {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid var(--kaspa-light);
+}
+
+#search input {
+    width: 70%;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid var(--kaspa-primary);
+    border-radius: 4px;
+}
+
+#search button {
+    padding: 10px 20px;
+    background: var(--kaspa-accent);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+#search button:hover {
+    background: var(--kaspa-hover);
+}
+
+
+/* Results Table */
+
+#utxo-results {
+    padding: 20px;
+}
+
+#utxo-results table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+#utxo-results th,
+#utxo-results td {
+    border: 1px solid var(--kaspa-light);
+    padding: 10px;
+    text-align: center;
+}
+
+#utxo-results th {
+    background: var(--kaspa-primary);
+    color: white;
+}
+
+#utxo-results td {
+    background: var(--kaspa-light);
+}
+
+
+/* Footer */
+
+footer {
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+    font-size: 0.9em;
+    color: var(--kaspa-primary);
+}
+
+
+/* Loading Spinner */
+
+.loading-spinner {
+    border: 6px solid var(--kaspa-light);
+    border-top: 6px solid var(--kaspa-accent);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
