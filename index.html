@@ -81,18 +81,14 @@
             /* 上边距 */
             padding: 30px;
             /* 增加内边距 */
-            /* 添加内边距 */
             background: linear-gradient(135deg, #4CAF50, #2E7D32);
             /* 渐变背景 */
-            /* 背景颜色 */
             border: 1px solid #ddd;
             /* 边框 */
             border-radius: 12px;
             /* 增加圆角 */
-            /* 圆角 */
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             /* 增加阴影效果 */
-            /* 阴影效果 */
             font-family: Arial, sans-serif;
             /* 字体 */
             color: white;
@@ -106,130 +102,445 @@
             /* 使图片为块级元素 */
             margin: 0 auto 20px;
             /* 居中对齐并添加下边距 */
-            border-radius: 8px;
-            /* 增加圆角 */
-        }
-        
-        #token-info p {
-            margin: 15px 0;
-            /* 增加段落间距 */
-            /* 段落间距 */
-            line-height: 1.8;
-            /* 增加行高 */
-            /* 行高 */
-        }
-        
-        #token-info strong {
-            color: #FFD700;
-            /* 强调文本颜色 */
-            /* 使用金色强调文本 */
-            font-size: 1.1em;
-            /* 增加字体大小 */
-        }
-        /* 交易所样式 */
-        
-        #exchanges {
-            margin-top: 20px;
-            background-color: #f9f9f9;
-            /* 背景颜色 */
-            padding: 20px;
-            /* 内边距 */
-            border-radius: 12px;
-            /* 圆角 */
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            /* 阴影效果 */
-        }
-        
-        #exchanges h2 {
-            text-align: center;
-            /* 标题居中 */
-            color: #333;
-            /* 标题颜色 */
-        }
-        
-        .exchange {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            margin: 0 10px;
-            border: 1px solid #ddd;
-            /* 边框 */
-            border-radius: 8px;
-            /* 圆角 */
-            padding: 10px;
-            /* 内边距 */
-            background-color: white;
-            /* 背景颜色 */
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            /* 阴影效果 */
-        }
-        
-        .exchange img {
-            max-width: 80px;
-            /* 设置交易所logo的最大宽度 */
         }
     </style>
+    <script>
+        const translations = {
+            en: {
+                title: "Kaspa UTXO Viewer",
+                search: "Search UTXO",
+                enterAddress: "Enter Wallet Address",
+                results: "Results",
+                noData: "No data available. Please search an address.",
+                tokenInfo: "TOKEN INFO",
+                joinCommunity: "Join Our Community",
+                telegram: "Join our Telegram group for updates and discussions!",
+                exchanges: "Exchanges",
+                kaspaDescription: "Kaspa is a UTXO Chain",
+                tokenDeploymentDate: "UTXO Deployment Date:",
+                limitPerMint: "Limit Per Mint:",
+                utxoSupply: "UTXO Supply:",
+                communityDriven: "UTXO has no team, only community: Our project is entirely community-driven, with no centralized team.",
+                learnMore: "Learn more about UTXOs",
+                joinTelegram: "Join our Telegram group",
+                telegramDescription: "Join our Telegram group for updates and discussions!",
+                transactionID: "Transaction ID",
+                index: "Index",
+                valueKAS: "Value (KAS)",
+                confirmations: "Confirmations",
+                kaspaDescriptionText: "Unlike Account-based blockchains, such as Ethereum, EOS, Tron, and Ethereum Classic, Kaspa uses UTXOs as Bitcoin does. If you have used a Kaspa non-custodial wallet or ventured onto the explorer, you may see that both TXs and UTXOs are logged. To the average user, the operations of Account-based chains to UTXO-based chains seem similar; however, a UTXO is a unique ledger process exclusive to crypto transactions and is considered more secure and transparent.",
+                utxoMethod: "A UTXO-based blockchain uses the <strong>unspent transaction output</strong> method for accounting. This method was first introduced in the Bitcoin whitepaper by Satoshi Nakamoto. Unlike traditional accounting systems, a UTXO-based ledger does not have accounts or wallets at the protocol level. Instead, transactions consist of a combination of inputs and outputs. The coins are recorded as a list of unspent transaction outputs. Though wallets can be built using crypto APIs on UTXO-based blockchains like Bitcoin, these are not part of the chain’s protocol level.",
+                utxoAndTx: "Transactions (TX) in a UTXO chain are made by utilizing existing unspent transaction outputs (UTXOs) and creating new UTXOs in their place. A UTXO value cannot be split but can be combined with other UTXOs to meet the required transaction amount. Think of UTXOs like cash bills: just as a paper bill cannot be divided, a UTXO value must be used in its entirety.",
+                moreInfo: "For more information, visit the official page: Kaspa and the UTXO",
+            },
+            ja: {
+                title: "カスパUTXOビューワー",
+                search: "UTXOを検索",
+                enterAddress: "ウォレットアドレスを入力",
+                results: "結果",
+                noData: "データがありません。アドレスを検索してください。",
+                tokenInfo: "トークン情報",
+                joinCommunity: "コミュニティに参加",
+                telegram: "最新情報やディスカッションのためにTelegramグループに参加してください！",
+                exchanges: "取引所",
+                kaspaDescription: "KaspaはUTXOチェーンです",
+                tokenDeploymentDate: "UTXO配信日:",
+                limitPerMint: "ミントあたりの制限:",
+                utxoSupply: "UTXO供給:",
+                communityDriven: "UTXOにはチームがなく、コミュニティだけです: 私たちのプロジェクトは完全にコミュニティ主導であり、中央集権的なチームはありません。",
+                learnMore: "UTXOについてもっと学ぶ",
+                joinTelegram: "私たちのTelegramグループに参加してください",
+                telegramDescription: "最新情報やディスカッションのためにTelegramグループに参加してください！",
+                transactionID: "取引ID",
+                index: "インデックス",
+                valueKAS: "値(KAS)",
+                confirmations: "確認",
+                kaspaDescriptionText: "Ethereum、EOS、Tron、Ethereum Classicなどのアカウントベースのブロックチェーンとは異なり、KaspaはBitcoinのようにUTXOを使用します。Kaspaの非保管ウォレットを使用したり、エクスプローラーを訪れたりした場合、TXとUTXOの両方が記録されいるのを見ることができます。一般のユーザーにとって、アカウントベースのチェーンとUTXOベースのチェーンの操作は似ているように見えますが、UTXOは暗号取引専用のユニークな台帳プロセスであり、より安全で透明であると考えられています。",
+                utxoMethod: "UTXOベースのブロックチェーンは、会計に未使用のトランザクション出力メソッドを使用します。このメソッドは、サトシ・ナカモトによってビットコインのホワイトペーパーで初めて紹介されました。従来の会計システムとは異なり、UTXOベースの台帳にはプロトコルレベルでアカウントやウォレットがありません。代わりに、トランザクションは入力と出力の組み合わせで構成されます。コインは未使用のトランザクション出力のリストとして記録されます。ビットコインのようなUTXOベースのブロックチェーン上で暗号APIを使用してウォレットを構築することはできますが、これらはチェーンのプロトコルレベルの一部ではありません。",
+                utxoAndTx: "UTXOチェーンのトランザクション（TX）は、既存の未使用トランザクション出力（UTXO）を利用し、その場所に新しいUTXOを作成することによって行われます。UTXOの値は分割できませんが、必要なトランザクション金額を満たすために他のUTXOと組み合わせることができます。UTXOを現金のように考えてください: 紙幣が分割できないように、UTXOの値も完全に使用する必要があります。",
+                moreInfo: "詳細については、公式ページをご覧ください: KaspaとUTXO",
+            },
+            fr: {
+                title: "Visionneuse UTXO de Kaspa",
+                search: "Rechercher UTXO",
+                enterAddress: "Entrez l'adresse du portefeuille",
+                results: "Résultats",
+                noData: "Aucune donnée disponible. Veuillez rechercher une adresse.",
+                tokenInfo: "INFORMATIONS SUR LE TOKEN",
+                joinCommunity: "Rejoignez notre communauté",
+                telegram: "Rejoignez notre groupe Telegram pour des mises à jour et des discussions !",
+                exchanges: "Échanges",
+                kaspaDescription: "Kaspa est une chaîne UTXO",
+                tokenDeploymentDate: "Date de déploiement de l'UTXO :",
+                limitPerMint: "Limite par mint :",
+                utxoSupply: "Approvisionnement UTXO :",
+                communityDriven: "L'UTXO n'a pas d'équipe, seulement une communauté : Notre projet est entièrement dirigé par la communauté, sans équipe centralisée.",
+                learnMore: "En savoir plus sur les UTXOs",
+                joinTelegram: "Rejoignez notre groupe Telegram",
+                telegramDescription: "Rejoignez notre groupe Telegram pour des mises à jour et des discussions !",
+                transactionID: "ID de transaction",
+                index: "Index",
+                valueKAS: "Valeur (KAS)",
+                confirmations: "Confirmations",
+                kaspaDescriptionText: "Contrairement aux blockchains basées sur des comptes, telles qu'Ethereum, EOS, Tron et Ethereum Classic, Kaspa utilise des UTXOs comme Bitcoin. Si vous avez utilisé un portefeuille non custodial de Kaspa ou visité l'explorateur, vous pouvez voir que les TX et les UTXOs sont tous deux enregistrés. Pour l'utilisateur moyen, les opérations des chaînes basées sur des comptes et des chaînes basées sur des UTXO semblent similaires ; cependant, un UTXO est un processus de grand livre unique exclusif aux transactions cryptographiques et est considéré comme plus sûr et plus transparent.",
+                utxoMethod: "Une blockchain basée sur UTXO utilise la méthode de sortie de transaction non dépensée pour la comptabilité. Cette méthode a été introduite pour la première fois dans le livre blanc de Bitcoin par Satoshi Nakamoto. Contrairement aux systèmes comptables traditionnels, un grand livre basé sur UTXO n'a pas de comptes ou de portefeuilles au niveau du protocole. Au lieu de cela, les transactions consistent en une combinaison d'entrées et de sorties. Les pièces sont enregistrées sous forme de liste de sorties de transaction non dépensées. Bien que des portefeuilles puissent être construits en utilisant des API cryptographiques sur des blockchains basées sur UTXO comme Bitcoin, ceux-ci ne font pas partie du niveau de protocole de la chaîne.",
+                utxoAndTx: "Les transactions (TX) dans une chaîne UTXO sont effectuées en utilisant des sorties de transaction non dépensées (UTXOs) existantes et en créant de nouveaux UTXOs à leur place. Une valeur UTXO ne peut pas être divisée, mais peut être combinée avec d'autres UTXOs pour atteindre le montant de transaction requis. Pensez aux UTXOs comme à des billets de banque : tout comme un billet de papier ne peut pas être divisé, une valeur UTXO doit être utilisée dans son intégralité.",
+                moreInfo: "Pour plus d'informations, visitez la page officielle : Kaspa et l'UTXO",
+            },
+            de: {
+                title: "Kaspa UTXO Viewer",
+                search: "UTXO suchen",
+                enterAddress: "Wallet-Adresse eingeben",
+                results: "Ergebnisse",
+                noData: "Keine Daten verfügbar. Bitte suchen Sie eine Adresse.",
+                tokenInfo: "TOKEN-INFO",
+                joinCommunity: "Treten Sie unserer Community bei",
+                telegram: "Treten Sie unserer Telegram-Gruppe für Updates und Diskussionen bei!",
+                exchanges: "Börsen",
+                kaspaDescription: "Kaspa ist eine UTXO-Kette",
+                tokenDeploymentDate: "UTXO-Bereitstellungsdatum:",
+                limitPerMint: "Limit pro Mint:",
+                utxoSupply: "UTXO-Versorgung:",
+                communityDriven: "UTXO hat kein Team, nur die Community: Unser Projekt wird vollständig von der Community betrieben, ohne zentralisiertes Team.",
+                learnMore: "Erfahren Sie mehr über UTXOs",
+                joinTelegram: "Treten Sie unserer Telegram-Gruppe bei",
+                telegramDescription: "Treten Sie unserer Telegram-Gruppe für Updates und Diskussionen bei!",
+                transactionID: "Transaktions-ID",
+                index: "Index",
+                valueKAS: "Wert (KAS)",
+                confirmations: "Bestätigungen",
+                kaspaDescriptionText: "Im Gegensatz zu kontobasierten Blockchains wie Ethereum, EOS, Tron und Ethereum Classic verwendet Kaspa UTXOs wie Bitcoin. Wenn Sie eine nicht verwahrte Kaspa-Wallet verwendet oder den Explorer besucht haben, sehen Sie möglicherweise, dass sowohl TXs als auch UTXOs protokolliert werden. Für den durchschnittlichen Benutzer scheinen die Operationen von kontobasierten Ketten und UTXO-basierten Ketten ähnlich zu sein; jedoch ist ein UTXO ein einzigartiger Buchhaltungsprozess, der exklusiv für Krypto-Transaktionen ist und als sicherer und transparenter gilt.",
+                utxoMethod: "Eine UTXO-basierte Blockchain verwendet die Methode der nicht ausgegebenen Transaktionsausgabe zur Buchhaltung. Diese Methode wurde erstmals im Bitcoin-Whitepaper von Satoshi Nakamoto eingeführt. Im Gegensatz zu traditionellen Buchhaltungssystemen hat ein UTXO-basiertes Hauptbuch auf Protokollebene keine Konten oder Wallets. Stattdessen bestehen Transaktionen aus einer Kombination von Eingaben und Ausgaben. Die Münzen werden als Liste von nicht ausgegebenen Transaktionsausgaben aufgezeichnet. Obwohl Wallets mit Krypto-APIs auf UTXO-basierten Blockchains wie Bitcoin erstellt werden können, sind diese nicht Teil des Protokollebene der Kette.",
+                utxoAndTx: "Transaktionen (TX) in einer UTXO-Kette werden durchgeführt, indem vorhandene nicht ausgegebene Transaktionsausgaben (UTXOs) verwendet und neue UTXOs an deren Stelle erstellt werden. Ein UTXO-Wert kann nicht geteilt, aber mit anderen UTXOs kombiniert werden, um den erforderlichen Transaktionsbetrag zu erreichen. Denken Sie an UTXOs wie an Bargeldscheine: So wie ein Papiergeldschein nicht geteilt werden kann, muss ein UTXO-Wert in vollem Umfang verwendet werden.",
+                moreInfo: "Für weitere Informationen besuchen Sie die offizielle Seite: Kaspa und das UTXO",
+            },
+            ko: {
+                title: "Kaspa UTXO 뷰어",
+                search: "UTXO 검색",
+                enterAddress: "지갑 주소 입력",
+                results: "결과",
+                noData: "데이터가 없습니다. 주소를 검색해 주세요.",
+                tokenInfo: "토큰 정보",
+                joinCommunity: "커뮤니티에 참여하세요",
+                telegram: "업데이트 및 토론을 위해 텔레그램 그룹에 참여하세요!",
+                exchanges: "거래소",
+                kaspaDescription: "Kaspa는 UTXO 체인입니다",
+                tokenDeploymentDate: "UTXO 배포 날짜:",
+                limitPerMint: "민트당 한도:",
+                utxoSupply: "UTXO 공급:",
+                communityDriven: "UTXO에는 팀이 없고, 오직 커뮤니티만 있습니다: 우리의 프로젝트는 완전히 커뮤니티 주도이며, 중앙집중식 팀이 없습니다.",
+                learnMore: "UTXO에 대해 더 알아보기",
+                joinTelegram: "우리의 텔레그램 그룹에 참여하세요",
+                telegramDescription: "업데이트 및 토론을 위해 텔레그램 그룹에 참여하세요!",
+                transactionID: "거래 ID",
+                index: "인덱스",
+                valueKAS: "값 (KAS)",
+                confirmations: "확인",
+                kaspaDescriptionText: "Ethereum, EOS, Tron 및 Ethereum Classic과 같은 계정 기반 블록체인과 달리, Kaspa는 Bitcoin과 같이 UTXO를 사용합니다. Kaspa 비보관 지갑을 사용했거나 탐색기를 방문한 경우 TX와 UTXO가 모두 기록되는 것을 볼 수 있습니다. 일반 사용자에게는 계정 기반 체인과 UTXO 기반 체인의 작업이 유사해 보이지만, UTXO는 암호화 거래에 독점적인 고유한 원장 프로세스이며 더 안전하고 투명한 것으로 간주됩니다.",
+                utxoMethod: "UTXO 기반 블록체인은 회계에 대해 미사용 거래 출력 방법을 사용합니다. 이 방법은 사토시 나카모토에 의해 비트코인 백서에서 처음 소개되었습니다. 전통적인 회계 시스템과 달리, UTXO 기반 원장에는 프로토콜 수준에서 계정이나 지갑이 없습니다. 대신 거래는 입력과 출력의 조합으로 구성됩니다. 코인은 미사용 거래 출 목록으로 기록됩니다. 비트코인과 같은 UTXO 기반 블록체인에서 암호화 API를 사용하여 지갑을 구축할 수 있지만, 이는 체인의 프로토콜 수준의 일부가 아닙니다.",
+                utxoAndTx: "UTXO 체인의 거래(TX)는 기존의 미사용 거래 출력(UTXO)을 활용하고 그 자리에 새로운 UTXO를 생성하여 이루어집니다. UTXO 값은 나눌 수 없지만, 필요한 거래 금액을 충족하기 위해 다른 UTXO와 결합할 수 있습니다. UTXO를 현금 지폐처럼 생각하세요: 종이 지폐가 나눌 수 없는 것처럼, UTXO 값도 전부 사용해야 합니다.",
+                moreInfo: "자세한 내용은 공식 페이지를 방문하세요: Kaspa와 UTXO",
+            },
+            zhCN: {
+                title: "Kaspa UTXO 查看器",
+                search: "搜索 UTXO",
+                enterAddress: "输入钱包地址",
+                results: "结果",
+                noData: "没有可用数据。请搜索一个地址。",
+                tokenInfo: "代币信息",
+                joinCommunity: "加入我们的社区",
+                telegram: "加入我们的 Telegram 群组以获取更新和讨论！",
+                exchanges: "交易所",
+                kaspaDescription: "Kaspa 是一个 UTXO 链",
+                tokenDeploymentDate: "UTXO 部署日期：",
+                limitPerMint: "每次铸造限制：",
+                utxoSupply: "UTXO 供应：",
+                communityDriven: "UTXO 没有团队，只有社区：我们的项目完全由社区驱动，没有集中团队。",
+                learnMore: "了解更多关于 UTXO 的信息",
+                joinTelegram: "加入我们的 Telegram 群组",
+                telegramDescription: "加入我们的 Telegram 群组以获取更新和讨论！",
+                transactionID: "交易 ID",
+                index: "索引",
+                valueKAS: "值 (KAS)",
+                confirmations: "确认",
+                kaspaDescriptionText: "与以太坊、EOS、Tron 和以太坊经典等基于账户的区块链不同，Kaspa 像比特币一样使用 UTXO。如果您使用过 Kaspa 非托管钱包或访问过浏览器，您可能会看到 TX 和 UTXO 都被记录。对于普通用户来说，基于账户的链和基于 UTXO 的链的操作似乎相似；然而，UTXO 是一种独特的账本过程，专用于加密交易，被认为更安全和透明。",
+                utxoMethod: "基于 UTXO 的区块链使用未花费交易输出方法进行会计。该方法首次在比特币白皮书中由中本聪提出。与传统会计系统不同，基于 UTXO 的账本在协议层面上没有账户或钱包。相反，交易由输入和输出的组合组成。硬币以未花费交易输出的列表形式记录。尽管可以在像比特币这样的基于 UTXO 的区块链上使用加密 API 构建钱包，但这些并不是链的协议层的一部分。",
+                utxoAndTx: "在 UTXO 链中的交易（TX）是通过利用现有的未花费交易输出（UTXO）并在其位置创建新的 UTXO 来进行的。UTXO 值不能被拆分，但可以与其他 UTXO 组合以满足所需的交易金额。将 UTXO 想象成现金：就像纸币不能被分割一样，UTXO 值必须完整使用。",
+                moreInfo: "有关更多信息，请访问官方网站：Kaspa 和 UTXO",
+            },
+            zhTW: {
+                title: "Kaspa UTXO 查看器",
+                search: "搜索 UTXO",
+                enterAddress: "輸入錢包地址",
+                results: "結果",
+                noData: "沒有可用數據。請搜索一個地址。",
+                tokenInfo: "代幣信息",
+                joinCommunity: "加入我們的社區",
+                telegram: "加入我們的 Telegram 群組以獲取更新和討論！",
+                exchanges: "交易所",
+                kaspaDescription: "Kaspa 是一個 UTXO 鏈",
+                tokenDeploymentDate: "UTXO 部署日期：",
+                limitPerMint: "每次鑄造限制：",
+                utxoSupply: "UTXO 供應：",
+                communityDriven: "UTXO 沒有團隊，只有社區：我們的項目完全由社區驅動，沒有集中團隊。",
+                learnMore: "了解更多關於 UTXO 的信息",
+                joinTelegram: "加入我們的 Telegram 群組",
+                telegramDescription: "加入我們的 Telegram 群組以獲取更新和討論！",
+                transactionID: "交易 ID",
+                index: "索引",
+                valueKAS: "值 (KAS)",
+                confirmations: "確認",
+                kaspaDescriptionText: "與以太坊、EOS、Tron 和以太坊經典等基於賬戶的區塊鏈不同，Kaspa 像比特幣一樣使用 UTXO。如果您使用過 Kaspa 非托管錢包或訪問過瀏覽器，您可能會看到 TX 和 UTXO 都被記錄。對於普通用戶來說，基於賬戶的鏈和基於 UTXO 的鏈的操作似乎相似；然而，UTXO 是一種獨特的賬本過程，專用於加密交易，被認為更安全和透明。",
+                utxoMethod: "基於 UTXO 的區塊鏈使用未花費交易輸出方法進行會計。該方法首次在比特幣白皮書中由中本聰提出。與傳統會計系統不同，基於 UTXO 的賬本在協議層面上沒有賬戶或錢包。相反，交易由輸入和輸出的組合組成。硬幣以未花費交易輸出的列表形式記錄。儘管可以在像比特幣這樣的基於 UTXO 的區塊鏈上使用加密 API 構建錢包，但這些並不是鏈的協議層的一部分。",
+                utxoAndTx: "在 UTXO 鏈中的交易（TX）是通過利用現有的未花費交易輸出（UTXO）並在其位置創建新的 UTXO 來進行的。UTXO 值不能被拆分，但可以與其他 UTXO 組合以滿足所需的交易金額。將 UTXO 想像成現金：就像紙幣不能被分割一樣，UTXO 值必須完整使用。",
+                moreInfo: "有關更多信息，請訪問官方網站：Kaspa 和 UTXO",
+            },
+            hi: {
+                title: "Kaspa UTXO व्यूअर",
+                search: "UTXO खोजें",
+                enterAddress: "वॉलेट पता दर्ज करें",
+                results: "परिणाम",
+                noData: "कोई डेटा उपलब्ध नहीं है। कृपया एक पता खोजें।",
+                tokenInfo: "टोकन जानकारी",
+                joinCommunity: "हमारे समुदाय में शामिल हों",
+                telegram: "अपडेट और चर्चाओं के लिए हमारे टेलीग्राम समूह में शामिल हों!",
+                exchanges: "एक्सचेंज",
+                kaspaDescription: "Kaspa एक UTXO श्रृंखला है",
+                tokenDeploymentDate: "UTXO तैनाती तिथि:",
+                limitPerMint: "प्रति मिंट सीमा:",
+                utxoSupply: "UTXO आपूर्ति:",
+                communityDriven: "UTXO में कोई टीम नहीं है, केवल समुदाय: हमारा प्रोजेक्ट पूरी तरह से समुदाय द्वारा संचालित है, कोई केंद्रीकृत टीम नहीं।",
+                learnMore: "UTXOs के बारे में अधिक जानें",
+                joinTelegram: "हमारे टेलीग्राम समूह में शामिल हों",
+                telegramDescription: "अपडेट और चर्चाओं के लिए हमारे टेलीग्राम समूह में शामिल हों!",
+                transactionID: "लेन-देन ID",
+                index: "सूची",
+                valueKAS: "मूल्य (KAS)",
+                confirmations: "पुष्टिकरण",
+                kaspaDescriptionText: "Ethereum, EOS, Tron और Ethereum Classic जैसी खाता-आधारित ब्लॉकचेन के विपरीत, Kaspa Bitcoin की तरह UTXOs का उपयोग करता है। यदि आपने एक Kaspa गैर-निगरानी वॉलेट का उपयोग किया है या एक्सप्लोरर पर गए है, तो आप दे सकते हैं कि TX और UTXOs दोनों लॉग किए गए हैं। औसत उपयोगकर्ता के लिए, खाता-आधारित श्रृंखलाओं और UTXO-आधारित श्रृंखलाओं के संचालन समान प्रतीत होते हैं; हालाँकि, UTXO एक अद्वितीय खाता प्रक्रिया है जो क्रिप्टो लेनदेन के लिए विशेष है और इसे अधिक सुरक्षित और पारदर्शी माना जाता है।",
+                utxoMethod: "UTXO-आधारित ब्लॉकचेन लेखांकन के लिए अप्रयुक्त लेन-देन आउटपुट विधि का उपयोग करता है। इस विधि को पहली बार सतोशी नाकामोतो द्वारा बिटकॉइन श्वेत पत्र में पेश किया गया था। पारंपरिक लेखा प्रणालियों के विपरीत, UTXO-आधारित खाता स्तर पर कोई खाते या वॉलेट नहीं होते हैं। इसके बजाय, लेनदेन इनपुट और आउटपुट के संयोजन से बने होते हैं। सिक्के अप्रयुक्त लेन-देन आउटपुट की सूची के रूप में रिकॉर्ड किए जाते हैं। हालाँकि, बिटकॉइन जैसी UTXO-आधारित ब्लॉकचेन पर क्रिप्टो APIs का उपयोग करके वॉलेट बनाए जा सकते हैं, ये श्रृंखला के प्रोटोकॉल स्तर का हिस्सा नहीं हैं।",
+                utxoAndTx: "UTXO श्रृंखला में लेन-देन (TX) मौजूदा अप्रयुक्त लेन-देन आउटपुट (UTXOs) का उपयोग करके और उनके स्थान पर नए UTXOs बनाकर किए जाते हैं। UTXO मूल्य को विभाजित नहीं किया जा सकता है, लेकिन इसे आवश्यक लेन-देन राशि को पूरा करने के लिए अन्य UTXOs के साथ जोड़ा जा सकता है। UTXOs को नकद बिलों की तरह सोचें: जैसे कागज़ का बिल विभाजित नहीं किया जा सकता, UTXO मूल्य को पूरी तरह से उपयोग किया जाना चाहिए।",
+                moreInfo: "अधिक जानकारी के लिए, आधिकारिक पृष्ठ पर जाएँ: Kaspa और UTXO",
+            },
+            ar: {
+                title: "عارض UTXO كاسبا",
+                search: "ابحث عن UTXO",
+                enterAddress: "أدخل عنوان المحفظة",
+                results: "النتائج",
+                noData: "لا توجد بيانات متاحة. يرجى البحث عن عنوان.",
+                tokenInfo: "معلومات الرمز",
+                joinCommunity: "انضم إلى مجتمعنا",
+                telegram: "انضم إلى مجموعة Telegram الخاصة بنا للحصول على التحديثات والمناقشات!",
+                exchanges: "البورصات",
+                kaspaDescription: "كاسبا هي سلسلة UTXO",
+                tokenDeploymentDate: "تاريخ نشر UTXO:",
+                limitPerMint: "الحد الأقصى لكل عملية سك:",
+                utxoSupply: "إمدادات UTXO:",
+                communityDriven: "لا يوجد فريق لـ UTXO، فقط مجتمع: مشروعنا مدفوع بالكامل من قبل المجتمع، دون فريق مركزي.",
+                learnMore: "تعرف على المزيد حول UTXOs",
+                joinTelegram: "انضم إلى مجموعة Telegram الخاصة بنا",
+                telegramDescription: "انضم إلى مجموعة Telegram الخاصة بنا للحصول على التحديثات والمناقشات!",
+                transactionID: "معرف المعاملة",
+                index: "الفهرس",
+                valueKAS: "القيمة (KAS)",
+                confirmations: "التأكيدات",
+                kaspaDescriptionText: "على عكس سلاسل الكتل المعتمدة على الحسابات، مثل Ethereum وEOS وTron وEthereum Classic، تستخدم كاسبا UTXOs مثل Bitcoin. إذا كنت قد استخدمت محفظة كاسبا غير وصائية أو قمت بزيارة المستكشف، فقد ترى أن كل من TXs وUTXOs مسجلة. بالنسبة للمستخدم العادي، تبدو عمليات سلاسل الكتل المعتمدة على الحسابات وسلاسل الكتل المعتمدة على UTXO متشابهة؛ ومع ذلك، فإن UTXO هو عملية دفتر أستاذ فريدة حصرية للمعاملات المشفرة وتعتبر أكثر أمانًا وشفافية.",
+                utxoMethod: "تستخدم سلسلة الكتل المعتمدة على UTXO طريقة مخرجات المعاملات غير المنفقة للمحاسبة. تم تقديم هذه الطريقة لأول مرة في الورقة البيضاء لبيتكوين بواسطة ساتوشي ناكاموتو. على عكس أنظمة المحاسبة التقليدية، لا تحتوي دفاتر الأستاذ المعتمدة على UTXO على حسابات أو محافظ على مستوى البروتوكول. بدلاً من ذلك، تتكون المعاملات من مجموعة من المدخلات والمخرجات. يتم تسجيل العملات كقائمة من مخرجات المعاملات غير المنفقة. على الرغم من أنه يمكن بناء محافظ باستخدام واجهات برمجة التطبيقات المشفرة على سلاسل الكتل المعتمدة على UTXO مثل Bitcoin، إلا أن هذه ليست جزءًا من مستوى بروتوكول السلسلة.",
+                utxoAndTx: "تتم المعاملات (TX) في سلسلة UTXO من خلال استخدام مخرجات المعاملات غير المنفقة (UTXOs) الموجودة وإنشاء UTXOs جديدة في مكانها. لا يمكن تقسيم قيمة UTXO ولكن يمكن دمجها مع UTXOs أخرى لتلبية المبلغ المطلوب للمعاملة. فكر في UTXOs مثل الفواتير النقدية: تمامًا كما لا يمكن تقسيم فاتورة ورقية، يجب استخدام قيمة UTXO بالكامل.",
+                moreInfo: "للحصول على مزيد من المعلومات، يرجى زيارة الصفحة الرسمية: كاسبا وUTXO",
+            },
+            es: {
+                title: "Visor UTXO de Kaspa",
+                search: "Buscar UTXO",
+                enterAddress: "Ingrese la dirección de la billetera",
+                results: "Resultados",
+                noData: "No hay datos disponibles. Por favor, busque una dirección.",
+                tokenInfo: "INFORMACIÓN DEL TOKEN",
+                joinCommunity: "Únete a nuestra comunidad",
+                telegram: "¡Únete a nuestro grupo de Telegram para actualizaciones y discusiones!",
+                exchanges: "Intercambios",
+                kaspaDescription: "Kaspa es una cadena UTXO",
+                tokenDeploymentDate: "Fecha de implementación de UTXO:",
+                limitPerMint: "Límite por acuñación:",
+                utxoSupply: "Suministro de UTXO:",
+                communityDriven: "UTXO no tiene equipo, solo comunidad: Nuestro proyecto es completamente impulsado por la comunidad, sin equipo centralizado.",
+                learnMore: "Aprende más sobre UTXOs",
+                joinTelegram: "Únete a nuestro grupo de Telegram",
+                telegramDescription: "¡Únete a nuestro grupo de Telegram para actualizaciones y discusiones!",
+                transactionID: "ID de transacción",
+                index: "Índice",
+                valueKAS: "Valor (KAS)",
+                confirmations: "Confirmaciones",
+                kaspaDescriptionText: "A diferencia de las cadenas de bloques basadas en cuentas, como Ethereum, EOS, Tron y Ethereum Classic, Kaspa utiliza UTXOs como Bitcoin. Si has utilizado una billetera no custodial de Kaspa o has explorado el explorador, puedes ver que tanto TXs como UTXOs están registrados. Para el usuario promedio, las operaciones de las cadenas basadas en cuentas y las cadenas basadas en UTXO parecen similares; sin embargo, un UTXO es un proceso de libro mayor único exclusivo para transacciones criptográficas y se considera más seguro y transparente.",
+                utxoMethod: "Una cadena de bloques basada en UTXO utiliza el método de salida de transacción no gastada para la contabilidad. Este método fue introducido por primera vez en el libro blanco de Bitcoin por Satoshi Nakamoto. A diferencia de los sistemas contables tradicionales, un libro mayor basado en UTXO no tiene cuentas ni billeteras a nivel de protocolo. En cambio, las transacciones consisten en una combinación de entradas y salidas. Las monedas se registran como una lista de salidas de transacción no gastadas. Aunque se pueden construir billeteras utilizando API criptográficas en cadenas de bloques basadas en UTXO como Bitcoin, estas no son parte del nivel de protocolo de la cadena.",
+                utxoAndTx: "Las transacciones (TX) en una cadena UTXO se realizan utilizando salidas de transacción no gastadas (UTXOs) existentes y creando nuevos UTXOs en su lugar. Un valor UTXO no se puede dividir, pero se puede combinar con otros UTXOs para cumplir con el monto de la transacción requerida. Piensa en los UTXOs como billetes en efectivo: así como un billete de papel no se puede dividir, un valor UTXO debe usarse en su totalidad.",
+                moreInfo: "Para más información, visita la página oficial: Kaspa y el UTXO",
+            },
+        };
+
+        function changeLanguage(lang) {
+            document.title = translations[lang].title;
+            document.getElementById('search-title').innerText = translations[lang].search;
+            document.getElementById('address').placeholder = translations[lang].enterAddress;
+            document.getElementById('results-title').innerText = translations[lang].results;
+            document.getElementById('no-data').innerText = translations[lang].noData;
+            document.getElementById('token-info-title').innerText = translations[lang].tokenInfo;
+            document.getElementById('community-title').innerText = translations[lang].joinCommunity;
+            document.getElementById('community-description').innerText = translations[lang].telegram;
+            document.getElementById('exchanges-title').innerText = translations[lang].exchanges;
+            document.getElementById('kaspa-description-title').innerText = translations[lang].kaspaDescription;
+            document.getElementById('kaspa-description-text').innerText = translations[lang].kaspaDescriptionText;
+            document.getElementById('utxo-method').innerHTML = translations[lang].utxoMethod;
+            document.getElementById('utxo-and-tx').innerHTML = translations[lang].utxoAndTx;
+            document.getElementById('more-info').innerHTML = translations[lang].moreInfo;
+
+            // 更新表格标题
+            document.getElementById('transaction-id').innerText = translations[lang].transactionID;
+            document.getElementById('index').innerText = translations[lang].index;
+            document.getElementById('value-kas').innerText = translations[lang].valueKAS;
+            document.getElementById('confirmations').innerText = translations[lang].confirmations;
+        }
+    </script>
 </head>
 
 <body>
     <header>
-        <h1>Kaspa UTXO Explorer</h1>
+        <h1 id="main-title">Kaspa UTXO Explorer</h1>
+        <select onchange="changeLanguage(this.value)">
+            <option value="en">English</option>
+            <option value="ja">日本語</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="ko">한국어</option>
+            <option value="zhCN">简体中文</option>
+            <option value="zhTW">繁體中文</option>
+            <option value="hi">हिन्दी</option>
+            <option value="ar">العربية</option>
+            <option value="es">Español</option>
+        </select>
     </header>
     <main>
         <section id="search">
-            <h2>Search UTXO</h2>
+            <h2 id="search-title">Search UTXO</h2>
             <form id="utxo-form">
                 <input type="text" id="address" placeholder="Enter Wallet Address" required>
                 <button type="submit">Search</button>
             </form>
         </section>
         <section id="utxo-results">
-            <h2>Results</h2>
+            <h2 id="results-title">Results</h2>
             <table>
                 <thead>
                     <tr>
-                        <th>Transaction ID</th>
-                        <th>Index</th>
-                        <th>Value (KAS)</th>
-                        <th>Confirmations</th>
+                        <th id="transaction-id">Transaction ID</th>
+                        <th id="index">Index</th>
+                        <th id="value-kas">Value (KAS)</th>
+                        <th id="confirmations">Confirmations</th>
                     </tr>
                 </thead>
                 <tbody id="utxo-table-body">
                     <tr>
-                        <td colspan="4">No data available. Please search an address.</td>
+                        <td colspan="4" id="no-data">No data available. Please search an address.</td>
                     </tr>
                 </tbody>
             </table>
         </section>
     </main>
     <footer>
-        <p>&copy; 2024 Kaspa UTXO Explorer</p>
         <div id="token-info">
-            <h2 style="text-align: center; color: white;">TOKEN INFO</h2>
+            <h2 id="token-info-title" style="text-align: center; color: white;">TOKEN INFO</h2>
             <img src="utxos.png" alt="UTXOs Logo">
-            <!-- 替换为您的logo路径 -->
-            <p><strong>UTXO Deployment Date:</strong> 2024-09-16 17:31:12</p>
-            <p><strong>Limit Per Mint:</strong> 28,700</p>
-            <p><strong>UTXO Supply:</strong> 28,700,000,000</p>
-            <p><strong>UTXO has no team, only community:</strong> Our project is entirely community-driven, with no centralized team.</p>
-            <p><a href="https://kasplex.org/details?tick=UTXO" style="color: #FFD700; text-decoration: underline;">Learn more about UTXOs</a></p>
+            <p id="token-deployment-date"><strong>UTXO Deployment Date:</strong> 2024-09-16 17:31:12</p>
+            <p id="limit-per-mint"><strong>Limit Per Mint:</strong> 28,700</p>
+            <p id="utxo-supply"><strong>UTXO Supply:</strong> 28,700,000,000</p>
+            <p id="community-driven"><strong>UTXO has no team, only community:</strong> Our project is entirely community-driven, with no centralized team.</p>
+            <p><a href="https://kasplex.org/details?tick=UTXO" style="color: #FFD700; text-decoration: underline;" id="learn-more">Learn more about UTXOs</a></p>
         </div>
-        <!-- 新增交易所版块 -->
-        <section id="exchanges">
-            <h2>Exchanges</h2>
-            <div style="display: flex; justify-content: space-around;">
-                <div class="exchange">
-                    <img src="kaspiano.png" alt="Kaspiano">
-                    <p>Kaspiano</p>
+        <div id="community-info" style="text-align: center; margin-top: 20px;">
+            <h3 id="community-title">Join Our Community</h3>
+            <p id="community-description">Join our Telegram group for updates and discussions!</p>
+            <a href="https://t.me/KaspaUTXO" style="color: #FFD700; text-decoration: underline;" id="join-telegram">Telegram Group</a>
+            <div>
+                <img src="KasUTXO.png" alt="Telegram QR Code" style="max-width: 150px; margin-top: 10px;">
+            </div>
+        </div>
+        <section id="exchanges" style="margin-top: 40px;">
+            <h2 id="exchanges-title">Exchanges</h2>
+            <div class="exchange-row" style="display: flex; justify-content: space-between;">
+                <div class="exchange" style="flex: 1; margin: 10px; text-align: center;">
+                    <a href="https://www.kaspiano.com/marketplace" target="_blank">
+                        <img src="kaspiano.png" alt="Exchange 1 Logo" style="max-width: 100px;">
+                        <h3>Kaspiano web3</h3>
+                    </a>
                 </div>
-                <div class="exchange">
-                    <img src="kaspiano.png" alt="kaspiano">
-                    <p>kaspiano</p>
+                <div class="exchange" style="flex: 1; margin: 10px; text-align: center;">
+                    <a href="https://chainge.finance/" target="_blank">
+                        <img src="chainge.png" alt="Exchange 2 Logo" style="max-width: 100px;">
+                        <h3>Chainge web3</h3>
+                    </a>
                 </div>
-                <div class="exchange">
-                    <img src="chainge.png" alt="chainge">
-                    <p>Chainge</p>
+                <div class="exchange" style="flex: 1; margin: 10px; text-align: center;">
+                    <a href="https://exchange3" target="_blank">
+                        <img src="coinex.png" alt="Exchange 3 Logo" style="max-width: 100px;">
+                        <h3>Coinex</h3>
+                    </a>
                 </div>
+            </div>
+            <div class="exchange-row" style="display: flex; justify-content: space-between;">
+                <div class="exchange" style="flex: 1; margin: 10px; text-align: center;">
+                    <a href="https://exchange4" target="_blank">
+                        <img src="bingx.jpg" alt="Exchange 4 Logo" style="max-width: 100px;">
+                        <h3>Bingx</h3>
+                    </a>
+                </div>
+                <div class="exchange" style="flex: 1; margin: 10px; text-align: center;">
+                    <a href="https://exchange" target="_blank">
+                        <img src="bitget.jpg" alt="Exchange 5 Logo" style="max-width: 100px;">
+                        <h3>Bitget</h3>
+                    </a>
+                </div>
+                <div class="exchange" style="flex: 1; margin: 10px; text-align: center;">
+                    <a href="https://exchange6" target="_blank">
+                        <img src="chainge.png" alt="Exchange 6 Logo" style="max-width: 100px;">
+                        <h3>Chainge</h3>
+                    </a>
+                </div>
+            </div>
+            <div class="exchange-row" style="display: flex; justify-content: space-between;">
+                <div class="exchange" style="flex: 1; margin: 10px; text-align: center;">
+                    <a href="https://exchange" target="_blank">
+                        <img src="utxo-bitmart.png" alt="Exchange 7 Logo" style="max-width: 100px;">
+                        <h3>Bitmart</h3>
+                    </a>
+                </div>
+                <div class="exchange" style="flex: 1; margin: 10px; text-align: center;">
+                    <a href="https://exchange8" target="_blank">
+                        <img src="utxo-gatoio.png" alt="Exchange 8 Logo" style="max-width: 100px;">
+                        <h3>Gate</h3>
+                    </a>
+                </div>
+                <div class="exchange" style="flex: 1; margin: 10px; text-align: center;">
+                    <a href="https://exchange9" target="_blank">
+                        <img src="utxo-okx-wallet.png" alt="Exchange 9 Logo" style="max-width: 100px;">
+                        <h3>okx</h3>
+                    </a>
+                </div>
+            </div>
+            <div id="kaspa-description" style="margin-top: 40px; padding: 20px; background-color: #e0f7e0; border: 1px solid #a5d6a7; border-radius: 8px; font-family: Arial, sans-serif;">
+                <h2 id="kaspa-description-title" style="color: #388e3c;">Kaspa is a UTXO Chain</h2>
+                <p id="kaspa-description-text">Unlike Account-based blockchains, such as Ethereum, EOS, Tron, and Ethereum Classic, Kaspa uses UTXOs as Bitcoin does. If you have used a Kaspa non-custodial wallet or ventured onto the explorer, you may see that both TXs and UTXOs are
+                    logged. To the average user, the operations of Account-based chains to UTXO-based chains seem similar; however, a UTXO is a unique ledger process exclusive to crypto transactions and is considered more secure and transparent.</p>
+
+                <h3 style="color: #388e3c;">The UTXO</h3>
+                <p id="utxo-method">A UTXO-based blockchain uses the <strong>unspent transaction output</strong> method for accounting. This method was first introduced in the Bitcoin whitepaper by Satoshi Nakamoto. Unlike traditional accounting systems, a UTXO-based ledger
+                    does not have accounts or wallets at the protocol level. Instead, transactions consist of a combination of inputs and outputs. The coins are recorded as a list of unspent transaction outputs. Though wallets can be built using crypto
+                    APIs on UTXO-based blockchains like Bitcoin, these are not part of the chain’s protocol level.</p>
+
+                <h3 style="color: #388e3c;">The UTXO and the TX</h3>
+                <p id="utxo-and-tx">Transactions (TX) in a UTXO chain are made by utilizing existing unspent transaction outputs (UTXOs) and creating new UTXOs in their place. A UTXO value cannot be split but can be combined with other UTXOs to meet the required transaction
+                    amount. Think of UTXOs like cash bills: just as a paper bill cannot be divided, a UTXO value must be used in its entirety.</p>
+
+                <p id="more-info">For more information, visit the official page: <a href="https://kaspa.org/kaspa-and-the-utxo/" target="_blank" style="color: #1e88e5; text-decoration: underline;">Kaspa and the UTXO</a></p>
             </div>
         </section>
     </footer>
